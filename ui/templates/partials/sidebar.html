@@ -1,0 +1,89 @@
+{# ui/templates/partials/sidebar.html #}
+{% load static %}
+
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+  {# ---------- App logo and name ---------- #}
+  <div class="app-brand demo">
+    <a href="{% url 'index' %}" class="app-brand-link">
+      <span class="app-brand-logo demo">
+        <img src="{% static 'ui/theme/assets/img/favicon/favicon.ico' %}"
+             style="height:24px"
+             alt="ET4D Logo" />
+      </span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2">ET4D</span>
+    </a>
+    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+    </a>
+  </div>
+
+  <div class="menu-inner-shadow"></div>
+
+  <ul class="menu-inner py-1">
+
+    {# ---------- Main menu ---------- #}
+    <li class="menu-item{% if request.resolver_match.url_name == 'index' %} active{% endif %}">
+      <a href="{% url 'index' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-home"></i>
+        <div>Home</div>
+      </a>
+    </li>
+
+    <li class="menu-item{% if request.resolver_match.url_name == 'dashboard' %} active{% endif %}">
+      <a href="{% url 'dashboard' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-bar-chart"></i>
+        <div>Dashboard</div>
+      </a>
+    </li>
+
+    <li class="menu-item{% if request.resolver_match.url_name == 'allerts' %} active{% endif %}">
+      <a href="{% url 'allerts' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-error"></i>
+        <div>Allerts</div>
+      </a>
+    </li>
+
+    <li class="menu-item{% if request.resolver_match.url_name == 'survey' %} active{% endif %}">
+      <a href="{% url 'survey' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-edit"></i>
+        <div>Survey</div>
+      </a>
+    </li>
+
+    <li class="menu-item{% if request.resolver_match.url_name == 'communication' %} active{% endif %}">
+      <a href="{% url 'communication' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-chat"></i>
+        <div>Communication</div>
+      </a>
+    </li>
+
+    <li class="menu-item{% if request.resolver_match.url_name == 'contact' %} active{% endif %}">
+      <a href="{% url 'contact' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-phone"></i>
+        <div>Contact Us</div>
+      </a>
+    </li>
+
+
+    {# ---------- Divider and guest section ---------- #}
+    <li class="menu-header small text-uppercase">
+      <span class="menu-header-text">Guest</span>
+    </li>
+
+    <li class="menu-item{% if request.resolver_match.url_name == 'login' %} active{% endif %}">
+      <a href="{% url 'login' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-log-in"></i>
+        <div>Login</div>
+      </a>
+    </li>
+
+    <li class="menu-item{% if request.resolver_match.url_name == 'register' %} active{% endif %}">
+      <a href="{% url 'register' %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-user-plus"></i>
+        <div>Register</div>
+      </a>
+    </li>
+
+  </ul>
+</aside>
+

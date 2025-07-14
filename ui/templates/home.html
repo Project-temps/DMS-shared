@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Welcome • ET4D{% endblock %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 p-4">
+
+  <!--==========  Hero Section  ==========-->
+  <div class="row align-items-center mb-5">
+    <!-- Intro text -->
+    <div class="col-12 col-lg-6">
+      <h1 class="display-5 fw-bold mb-3">
+        Empowering <span class="text-primary">Environmental Monitoring</span> for Sustainable Farms
+      </h1>
+      <p class="lead text-muted mb-4">
+        ET4D aggregates real-time sensor data, advanced THI calculations and machine-learning
+        predictions to help researchers and farmers make smarter decisions.
+      </p>
+      <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg">
+        Explore Live Dashboard
+      </a>
+    </div>
+
+    <!-- Cows image -->
+    <div class="col-12 col-lg-6 text-center">
+      <img src="{% static 'ui/img/illustrations/milk-cows-2.jpg' %}"
+           class="img-fluid rounded shadow"
+           style="max-height:360px; object-fit:cover;"
+           alt="Milk Cows Illustration">
+    </div>
+  </div>
+  <hr class="my-5">
+
+  <!--==========  Key Features / Cards  ==========-->
+  <div class="row text-center gy-4">
+    <div class="col-12 col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body">
+          <i class="bx bx-line-chart fs-1 text-primary mb-3"></i>
+          <h5 class="card-title fw-semibold mb-2">Live Monitoring</h5>
+          <p class="card-text text-muted">
+            View up-to-date sensor readings from farms in Germany, Poland and beyond.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body">
+          <i class="bx bx-bar-chart-alt-2 fs-1 text-primary mb-3"></i>
+          <h5 class="card-title fw-semibold mb-2">Data Analytics</h5>
+          <p class="card-text text-muted">
+            Analyze historical trends and export statistics for research and reporting.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body">
+          <i class="bx bx-cog fs-1 text-primary mb-3"></i>
+          <h5 class="card-title fw-semibold mb-2">Modeling Tools</h5>
+          <p class="card-text text-muted">
+            Run THI calculations and machine-learning models to predict farm conditions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

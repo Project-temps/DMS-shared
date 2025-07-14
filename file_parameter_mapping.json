@@ -1,0 +1,9 @@
+{
+    "Calcmet - CH4.csv": "ch4",
+    "Calcmet - CO2.csv": "co2",
+    "Calcmet - NH3.csv": "nh3",
+    "Device 14 TempHum - humidity.csv": "humidity",
+    "Device 14 TempHum - temperature.csv": "temperature",
+    "USA 16 - velocityNorthSouth.csv": "wind_ns",
+    "USA 16 - velocityWestEast.csv": "wind_ew"
+}

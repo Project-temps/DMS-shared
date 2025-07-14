@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'ui/theme/assets/vendor/css/core.css' %}">
+  <link rel="stylesheet" href="{% static 'ui/theme/assets/vendor/css/theme-default.css' %}">
+</head>
+<body>
+  <div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+      <div class="authentication-inner">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="mb-2">Welcome</h4>
+            <form action="{% url 'login' %}" method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Username" required>
+              </div>
+              <div class="mb-3 form-password-toggle">
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+              </div>
+              {% if messages %}
+                {% for m in messages %}
+                  <div class="alert alert-danger p-1">{{ m }}</div>
+                {% endfor %}
+              {% endif %}
+              <button class="btn btn-primary d-grid w-100">Log in</button>
+            </form>
+            <p class="text-center mt-3">
+              <a href="{% url 'password_reset' %}">Forgot password?</a>
+            </p>
+            <p class="text-center">
+              New user?
+              <a href="{% url 'register' %}">Create account</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'ui/theme/assets/vendor/libs/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'ui/theme/assets/vendor/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

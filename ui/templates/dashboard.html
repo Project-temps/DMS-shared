@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %} 
+{% load plotly_dash %}
+
+{% block title %}Dashboard • ET4D{% endblock %}
+
+{% block extra_css %}
+  <link href="{% static 'ui/theme/assets/css/demo.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+
+  <!-- Intro section -->
+  <div class="row mb-4">
+    <div class="col-12 col-lg-8">
+      <h1>Dashboard</h1>
+      <p class="lead">
+        The Environmental Traits for Dairy (ET4D) dashboard aggregates real-time sensor
+        readings, THI calculations and machine-learning forecasts to help you keep herds
+        healthy and barns efficient.
+      </p>
+    </div>
+  </div>
+
+  <!-- Dash app section -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="dash-app">
+        {# Embed the Dash application directly without an iframe #}
+        {% plotly_direct name="dashapp" %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Call to action -->
+  <div class="row align-items-center">
+    <div class="col-12 col-lg-8 mb-4 mb-lg-0">
+      <div class="alert alert-primary d-flex align-items-center" role="alert">
+        <i class="bx bx-lock-open me-2 fs-4"></i>
+        <div>
+          <strong>Need deeper insights?</strong><br>
+          Create an account or log in to unlock personalised dashboards, modeling tools &amp; data export.
+        </div>
+      </div>
+      <a href="{% url 'register' %}" class="btn btn-success me-2">Create account</a>
+      <a href="{% url 'login' %}" class="btn btn-outline-primary">Log in</a>
+    </div>
+    <div class="col-12 col-lg-4 text-center">
+      <img src="{% static 'ui/theme/assets/img/illustrations/man-with-laptop-light.png' %}"
+           class="img-fluid" style="max-height:250px;" alt="Dashboard illustration">
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+

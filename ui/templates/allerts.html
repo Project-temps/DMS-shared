@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Allerts • ET4D{% endblock %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+  <h4 class="fw-bold mb-4">
+    <span class="text-muted fw-light">Monitoring /</span> Allerts
+  </h4>
+
+  <div class="row mb-4">
+    <div class="col-12 col-lg-8">
+      <h5>EU-recommended thresholds</h5>
+      <ul>
+        <li>Ammonia: below 9.5 ppm</li>
+        <li>Carbon dioxide: below 2850 ppm</li>
+        <li>Airborne dust (particulate matter): below 200 µg/m³</li>
+        <li>Relative humidity: 30 – 80 %</li>
+        <li>Temperature: 20 – 24 °C</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h5>Percentage of time outside the recommended range</h5>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Farm</th>
+            <th>Ammonia</th>
+            <th>CO₂</th>
+            <th>Dust</th>
+            <th>Humidity</th>
+            <th>Temperature</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Germany Farm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Poland Farm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Estonia Farm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Turkey Farm</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

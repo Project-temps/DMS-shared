@@ -1,0 +1,47 @@
+# Python virtual environments
+venv/
+env/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+.Python
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Python packaging and testing artifacts
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# Django
+*.log
+*.pot
+*.sqlite3
+*.db
+db.sqlite3
+/staticfiles/
+/media/
+/static/
+
+# Environment variables
+.env
+.env.*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# OS-generated files
+.DS_Store
+Thumbs.db

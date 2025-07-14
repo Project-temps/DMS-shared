@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="light-style">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sign-up</title>
+
+    <!-- Sneat core styles -->
+    <link rel="stylesheet" href="{% static 'ui/theme/assets/vendor/css/core.css' %}">
+    <link rel="stylesheet" href="{% static 'ui/theme/assets/vendor/css/theme-default.css' %}">
+    <link rel="stylesheet" href="{% static 'ui/theme/assets/css/demo.css' %}">
+  </head>
+
+  <body>
+    <div class="container-xxl">
+      <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+
+          <!-- Card -->
+          <div class="card">
+            <div class="card-body">
+              <h4 class="mb-2">Create an account</h4>
+              <p class="mb-4">Fill the form below and choose your role.</p>
+
+              <!-- =======  Sign-up Form  ======= -->
+              <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+
+                <!-- Username -->
+                <div class="mb-3">
+                  <label class="form-label" for="signup-username">Username</label>
+                  <input
+                    type="text"
+                    id="signup-username"
+                    name="username"
+                    class="form-control"
+                    placeholder="jdoe"
+                    required
+                  />
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                  <label class="form-label" for="signup-email">Email</label>
+                  <input
+                    type="email"
+                    id="signup-email"
+                    name="email"
+                    class="form-control"
+                    placeholder="john@example.com"
+                    required
+                  />
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3 form-password-toggle">
+                  <label class="form-label" for="signup-password">Password</label>
+                  <div class="input-group input-group-merge">
+                    <input
+                      type="password"
+                      id="signup-password"
+                      name="password"
+                      class="form-control"
+                      placeholder="········"
+                      required
+                    />
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
+                </div>
+
+                <!-- Select user role -->
+                <div class="mb-4">
+                  <label class="form-label" for="signup-group">Role</label>
+                  <select id="signup-group" name="group" class="form-select" required>
+                    <option value="" selected disabled>Select role…</option>
+                    <option value="Researcher">Researcher</option>
+                    <option value="Farmer">Farmer</option>
+                    <option value="Admin">Admin</option>
+                  </select>
+                </div>
+
+                <!-- Django messages -->
+                {% if messages %}
+                  {% for m in messages %}
+                    <div class="alert alert-info p-2">{{ m }}</div>
+                  {% endfor %}
+                {% endif %}
+
+                <!-- Button -->
+                <button class="btn btn-primary d-grid w-100">Register</button>
+              </form>
+              <!-- ======= /Form ======= -->
+
+              <p class="text-center mt-3">
+                Already have an account?
+                <a href="{% url 'login' %}">Log in</a>
+              </p>
+            </div>
+          </div>
+          <!-- /Card -->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Core JS -->
+    <script src="{% static 'ui/theme/assets/vendor/libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'ui/theme/assets/vendor/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Survey • ET4D{% endblock %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 p-4">
+
+  <h4 class="fw-bold mb-4">
+    <span class="text-muted fw-light">Consumer study /</span> Milk &amp; Dairy Survey
+  </h4>
+
+  <!-- ░░░  Introduction ░░░ -->
+  <div class="row align-items-center g-4 mb-5">
+    <!-- Text -->
+    <div class="col-lg-7">
+      <p class="lead">
+        <strong>Introduction to the study</strong><br>
+        I want to invite you to participate in a cow’s-milk consumer survey. This study is part of the
+        <abbr title="Environmental Technologies for Dairy – Horizon Europe project">ET4D</abbr> project implemented
+        in several European countries. In Germany the project is carried out by the <em>Leibniz Institute of
+        Agricultural Engineering & Bio-economy (ATB)</em>.
+      </p>
+      <p>
+        The major goal is to capture consumers’ opinions about milk, dairy products and the conditions under which
+        they are produced. The survey is anonymous and results will be reported only as aggregated statistics, so
+        no participant can be identified.
+      </p>
+    </div>
+
+    <!-- Image -->
+    <div class="col-lg-5 text-center">
+      <img src="{% static 'ui/img/illustrations/milk-cows.jpg' %}"
+           alt="Dairy cows in pasture" class="img-fluid rounded shadow-sm"
+           style="max-height: 260px;">
+    </div>
+  </div>
+
+  <!-- ░░░  Buttons ░░░ -->
+  <div class="row text-center gy-4">
+    <div class="col-sm-6">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScS1LJ.../viewform"
+         class="btn btn-primary btn-lg w-100">
+        <i class='bx bx-world me-1'></i> Take the Survey&nbsp;<small>(EN)</small>
+      </a>
+    </div>
+    <div class="col-sm-6">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfZOD.../viewform"
+         class="btn btn-primary btn-lg w-100">
+        <i class='bx bx-world me-1'></i> Zur Umfrage&nbsp;<small>(DE)</small>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /container -->
+{% endblock %}

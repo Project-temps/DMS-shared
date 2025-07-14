@@ -1,0 +1,126 @@
+name: Deploy to Windows VPS
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+# -------------------------------------------------- #
+# 1.  Run Django unit-tests on GitHub infrastructure #
+# -------------------------------------------------- #
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Python deps
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run unit tests
+      run: python manage.py test
+
+# -------------------------------------------------- #
+# 2.  Sync the repo *on the VPS* and stop on failure #
+# -------------------------------------------------- #
+  sync-code:
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_PORT: ${{ secrets.VPS_PORT }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+    steps:
+    - name: Prepare SSH key & config
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        cat <<EOF >> ~/.ssh/config
+        Host vps
+          HostName ${VPS_HOST}
+          Port     ${VPS_PORT}
+          User     ${VPS_USER}
+          IdentityFile ~/.ssh/id_ed25519
+          IdentitiesOnly yes
+          StrictHostKeyChecking no
+        Host github.com-dms
+          HostName github.com
+          User git
+          IdentityFile ~/.ssh/id_ed25519
+        EOF
+        ssh-keyscan -p "${VPS_PORT}" "${VPS_HOST}" >> ~/.ssh/known_hosts
+
+    - name: Fetch & reset working copy on VPS
+      run: |
+        ssh vps "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -Command "
+          cd 'C:\REPO\dms2\DMS'
+          git fetch origin main -q
+          if (-not \$?) { Write-Error 'git fetch failed'; exit 1 }
+          git reset --hard origin/main -q
+          if (-not \$?) { Write-Error 'git reset failed'; exit 1 }
+          Write-Host 'Checked-out commit:'; git rev-parse --short HEAD
+        "
+
+
+# -------------------------------------------------- #
+# 3.  Install deps, migrate, collectstatic, restart  #
+# -------------------------------------------------- #
+  deploy:
+    needs: sync-code
+    runs-on: ubuntu-latest
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_PORT: ${{ secrets.VPS_PORT }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+    steps:
+    - name: Re-use SSH key & config
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        cat <<EOF >> ~/.ssh/config
+        Host vps
+          HostName ${VPS_HOST}
+          Port     ${VPS_PORT}
+          User     ${VPS_USER}
+          IdentityFile ~/.ssh/id_ed25519
+          IdentitiesOnly yes
+          StrictHostKeyChecking no
+        EOF
+        ssh-keyscan -p "${VPS_PORT}" "${VPS_HOST}" >> ~/.ssh/known_hosts
+        printf '%s\n' \
+          'Host github.com-dms' \
+          '  HostName github.com' \
+          '  User git' \
+          '  IdentityFile ~/.ssh/id_ed25519' >> ~/.ssh/config
+
+
+    - name: Provision & restart service
+      run: |
+        ssh vps "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -Command "
+          cd 'C:\REPO\dms2\DMS'
+
+          # install / migrate (unchanged) ─────────────────────────
+          .\venv\Scripts\python.exe -m pip install --upgrade pip -q
+          .\venv\Scripts\pip.exe    install -r requirements.txt -q
+          .\venv\Scripts\python.exe manage.py migrate --noinput
+
+          # collectstatic with hard-fail ──────────────────────────
+          \$ErrorActionPreference = 'Stop'       # ← ① stop on cmdlet errors
+          .\venv\Scripts\python.exe manage.py collectstatic --noinput
+          if (\$LASTEXITCODE) {                  # ← ② stop if Django exits ≠ 0
+            Write-Error 'collectstatic failed'
+            exit \$LASTEXITCODE
+          }
+
+          # restart only if everything above succeeded
+          net stop  dms2
+          net start dms2
+        "
+

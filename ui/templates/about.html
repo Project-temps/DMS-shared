@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}About | ET4D{% endblock %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 container-p-y">
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Project /</span> About ET4D</h4>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Mission</h5>
+          <p>
+            Environmental Technologies for Dairy (ET4D) develops scalable monitoring
+            and modelling tools to reduce greenhouse-gas emissions in dairy farms across Europe.
+          </p>
+          <p>Our consortium gathers <strong>7 universities</strong> and <strong>3 industry partners</strong> from 5 countries.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Timeline</h5>
+          <img src="{% static 'ui/theme/assets/img/illustrations/man-with-laptop-light.png' %}" alt="timeline" class="img-fluid">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h6 class="card-title mb-3">Partners</h6>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2"><i class="bx bx-check-circle me-2 text-success"></i>University of Bonn (Coordinator)</li>
+            <li class="mb-2"><i class="bx bx-check-circle me-2 text-success"></i>Warsaw U. Life Sciences</li>
+            <li class="mb-2"><i class="bx bx-check-circle me-2 text-success"></i>ETH Zürich</li>
+            <li><i class="bx bx-check-circle me-2 text-success"></i>Fraunhofer IME</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

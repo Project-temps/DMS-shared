@@ -1,0 +1,47 @@
+{# ui/templates/base.html #}
+{% load static plotly_dash %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>{% block title %}ET4D{% endblock %}</title>
+
+    <link rel="icon" href="{% static 'ui/theme/assets/img/favicon/favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'ui/theme/assets/vendor/css/core.css' %}"/>
+    <link rel="stylesheet" href="{% static 'ui/theme/assets/vendor/css/theme-default.css' %}"/>
+    <link rel="stylesheet" href="{% static 'ui/theme/assets/css/demo.css' %}"/>
+    {% block extra_css %}{% endblock %}
+
+    <script src="{% static 'ui/theme/assets/vendor/js/helpers.js' %}"></script>
+    <script src="{% static 'ui/theme/assets/js/config.js' %}"></script>
+
+    {# inject the Dash CSS/JS bundles #}
+    {% plotly_header %}  <!-- loads all the JS/CSS your Dash apps need -->
+  </head>
+
+  <body>
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        {% include "partials/sidebar.html" %}
+        <div class="layout-page">
+          {% include "partials/navbar.html" %}
+          <div class="content-wrapper">
+            {% block content %}{% endblock %}
+            {% include "partials/footer.html" %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'ui/theme/assets/vendor/libs/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'ui/theme/assets/vendor/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'ui/theme/assets/vendor/js/menu.js' %}"></script>
+    <script src="{% static 'ui/theme/assets/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+
+    {# inject the Dash runtime & message-pipe if needed #}
+    {% plotly_footer %}  <!-- this must go just before </body> -->
+  </body>
+</html>

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Contact • ET4D{% endblock %}
+
+{% block content %}
+<div class="container-xxl flex-grow-1 p-4">
+  <h4 class="fw-bold mb-4">
+    <span class="text-muted fw-light">Get in touch /</span> Contact
+  </h4>
+
+  <!-- ░░░ 1. PEOPLE CARDS ░░░ -->
+  <div class="row g-4 justify-content-center mb-5">
+
+    <!-- ── Dr Sabrina Hempel ── -->
+    <div class="col-sm-6 col-lg-4">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body d-flex flex-column align-items-center">
+            <img src="{% static 'ui/img/People/Sabrina.jpg' %}"
+               class="rounded-circle mb-3 shadow"
+               style="width:150px;height:150px;object-fit:cover;" alt="Dr Sabrina Hempel">
+          <h6 class="card-title mb-1">Dr Sabrina Hempel</h6>
+          <p class="text-muted small mb-2">Project coordinator</p>
+          <ul class="list-unstyled small lh-lg mb-0">
+            <li><strong>Institute:</strong><br>
+                ATB Leibniz Institute for Agricultural Engineering &amp; Bioeconomy</li>
+            <li><strong>Department:</strong><br>Sensors & Modelling</li>
+            <li><strong>Tel:</strong> (+49) 331 5699-518</li>
+            <li><strong>Email:</strong>
+                <a href="mailto:SHempel@atb-potsdam.de">SHempel@atb-potsdam.de</a></li>
+            <li><strong>Address:</strong><br>
+                Max-Eyth-Allee 100<br>14469 Potsdam | DE</li>
+          </ul>
+        </div><!--/card-body-->
+      </div>
+    </div>
+
+    <!-- ── Prof Thomas Banhazi ── -->
+    <div class="col-sm-6 col-lg-4">
+      <div class="card h-100 shadow-sm text-center">
+        <div class="card-body d-flex flex-column align-items-center">
+          <img src="{% static 'ui/img/People/Thomas-Banhazi.jpg' %}"
+               class="rounded-circle mb-3 shadow"
+               style="width:150px;height:150px;object-fit:cover;" alt="Prof Thomas Banhazi">
+          <h6 class="card-title mb-1">Prof Thomas Banhazi</h6>
+          <p class="text-muted small mb-2">University of Southern Queensland</p>
+          <!-- Add phone or email if desired -->
+        </div>
+        <div class="card-footer small text-center fw-medium">
+          Australia
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /row -->
+
+  <!-- ░░░ 2. DIVIDER ░░░ -->
+  <hr class="my-4">
+
+  <!-- ░░░ 3. SUPPORT FORM ░░░ -->
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title mb-3">
+            <i class="bx bx-support me-1"></i>Contact the ET4D Support Team
+          </h5>
+
+          {% if messages %}
+            {% for m in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ m }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+
+          <form method="post">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Name*</label>
+                <input name="name" type="text" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email*</label>
+                <input name="email" type="email" class="form-control" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Subject*</label>
+                <input name="subject" type="text" class="form-control" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message*</label>
+                <textarea name="message" rows="5" class="form-control" required></textarea>
+              </div>
+              <div class="col-12 text-end">
+                <button class="btn btn-primary">
+                  <i class="bx bx-send me-1"></i>Submit
+                </button>
+              </div>
+            </div>
+          </form>
+
+        </div><!--/card-body-->
+      </div><!--/card-->
+    </div>
+  </div><!--/row-->
+
+</div><!--/container-->
+{% endblock %}

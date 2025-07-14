@@ -1,0 +1,21 @@
+{% load static %}
+<div class="col-md-4">
+  <div class="card h-100 text-center shadow-sm">
+    <div class="card-body">
+      <img src="{% static 'ui/img/team/'|add:photo %}"
+           class="rounded-circle mb-3"
+           style="width:110px;height:110px;object-fit:cover;"
+           alt="{{ name }}">
+      <h6 class="fw-bold mb-0">{{ name }}</h6>
+      <small class="text-muted d-block">{{ role }}</small>
+      <small class="text-muted d-block mb-3">{{ country }}</small>
+      <p class="mb-1 small">
+        <i class="bx bx-envelope me-1"></i>
+        <a href="mailto:{{ email }}">{{ email }}</a>
+      </p>
+      {% if phone %}
+        <p class="mb-0 small"><i class="bx bx-phone me-1"></i>{{ phone }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
